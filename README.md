@@ -1,32 +1,86 @@
-# E-commerce Microservice Application
+Great 👍 I’ll give you a **more professional README (portfolio-level)** that includes:
 
-This project is a cloud-native e-commerce system deployed on **Kubernetes**. The application allows users to browse products, add items to a cart, and complete purchases.
+* Project banner
+* Technology badges
+* Clean sections
+* Architecture diagram
+* Clear deployment steps
 
-The system is built using multiple backend services that communicate with each other using **gRPC**. Each service runs in its own container and is managed by Kubernetes.
+You can **copy this entire README** into your repo on GitHub.
 
-Application infrastructure is provisioned using **Terraform**, and the services are containerized using **Docker**.
+---
+
+# E-Commerce Microservice Application on AWS EKS
+
+<p align="center">
+Cloud-native e-commerce platform deployed on Kubernetes using AWS infrastructure
+</p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/Cloud-AWS-orange">
+<img src="https://img.shields.io/badge/Container-Docker-blue">
+<img src="https://img.shields.io/badge/Orchestration-Kubernetes-blue">
+<img src="https://img.shields.io/badge/IaC-Terraform-purple">
+<img src="https://img.shields.io/badge/Communication-gRPC-green">
+</p>
+
+---
+
+# Project Overview
+
+This project demonstrates how a modern **cloud-native e-commerce application** can be deployed using containerized microservices on Kubernetes.
+
+The application allows users to:
+
+* Browse products
+* Add items to a shopping cart
+* Complete checkout
+
+Each service runs inside a container and communicates with other services using **gRPC**.
+
+The infrastructure is deployed on **Amazon Web Services using
+Amazon Elastic Kubernetes Service and
+Amazon Elastic Container Registry.
+
+Infrastructure provisioning is handled using **Terraform**.
 
 ---
 
 # Architecture
 
-The application consists of several services working together to process user requests. The frontend service handles incoming requests and communicates with other backend services to complete actions such as browsing products, managing carts, and completing checkout. 
+The application follows a **microservices architecture** where different services handle specific parts of the e-commerce workflow.
 
-The application is deployed on Kubernetes using Amazon EKS.Each service runs as a container and communicates with other services using gRPC.
+Key components include:
 
-### High-Level Architecture
+* Frontend service
+* Product catalog service
+* Cart service
+* Checkout service
+* Payment service
+* Recommendation service
+* Redis for cart storage
 
-![Architecture Diagram](docs/architecture.png)
+Each service runs in its own container and is managed by **Kubernetes**.
 
-All services run as containers and are orchestrated using Kubernetes.
+### High Level Architecture
+
+<p align="center">
+<img src="docs/architecture.png" width="900">
+</p>
+
+All services run as containers and communicate using **gRPC**.
 
 ---
 
-# DevOps / Infrastructure Flow
- Developer
+# Infrastructure Flow
+
+The deployment workflow for the application is shown below.
+
+```
+Developer
    │
    ▼
-GitHub Repository
+Push Code to GitHub
    │
    ▼
 Run docker_image_buid_push.sh
@@ -38,33 +92,34 @@ Docker Images Built
 Push Images to Amazon ECR
    │
    ▼
-Terraform Creates EKS Cluster
+Terraform Creates Amazon EKS Cluster
    │
    ▼
-Kubernetes Deployments
+Kubernetes Deployments Applied
    │
    ▼
 Application Running on EKS
+```
+
+---
 
 # Technologies Used
 
-* **Docker** – Containerization of services
-* **Kubernetes** – Container orchestration
-* **Terraform** – Infrastructure provisioning
-* **gRPC** – Communication between services
-* **Redis** – Storage for shopping cart data
-
-The project can be deployed on Kubernetes clusters such as:
-
-* **Amazon EKS**
-* **Google Kubernetes Engine**
-* **Azure Kubernetes Service**
+| Technology                        | Purpose                        |
+| --------------------------------- | ------------------------------ |
+| Docker                            | Containerization of services   |
+| Kubernetes                        | Container orchestration        |
+| Terraform                         | Infrastructure provisioning    |
+| gRPC                              | Communication between services |
+| Redis                             | Storage for shopping cart data |
+| Amazon Elastic Container Registry | Container image registry       |
+| Amazon Elastic Kubernetes Service | Managed Kubernetes cluster     |
 
 ---
 
 # How to Run the Project
 
-### 1. Clone the repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Manojg-0/E-commerce-Microservice-application.git
@@ -73,38 +128,56 @@ cd E-commerce-Microservice-application
 
 ---
 
-### 2. Create the Kubernetes cluster
+# 2. Create the Kubernetes Cluster
 
-Navigate to the Terraform directory and provision the infrastructure:
+Navigate to the Terraform directory and create the infrastructure.
 
 ```bash
 cd EKS-cluster-terraform
+
 terraform init
 terraform plan
 terraform apply
 ```
 
-This will create the Kubernetes cluster.
+This will provision an **Amazon EKS cluster**.
 
 ---
 
-### 3. Build and push Docker images
+# 3. Connect to the Cluster
 
-Navigate to the microservices directory and run the build script:
+Configure kubectl to access the cluster.
+
+```bash
+aws eks --region ap-northeast-1 update-kubeconfig --name demo-cluster
+```
+
+---
+
+# 4. Build and Push Docker Images
+
+Navigate to the microservices directory.
 
 ```bash
 cd micro-service-demo
-chmod +x docker_image_buid_push.sh
+```
+
+Run the build script.
+
+```bash
 ./docker_image_buid_push.sh
 ```
 
-This script builds the Docker images for the services and pushes them to **Amazon Elastic Container Registry**.
+This script will:
+
+* Build Docker images for all services
+* Push images to **Amazon Elastic Container Registry**
 
 ---
 
-### 4. Deploy the application
+# 5. Deploy the Application
 
-Deploy the services to Kubernetes:
+Deploy the Kubernetes manifests.
 
 ```bash
 kubectl apply -f release/kubernetes-manifests.yaml
@@ -112,15 +185,15 @@ kubectl apply -f release/kubernetes-manifests.yaml
 
 ---
 
-### 5. Verify deployment
+# 6. Verify the Deployment
 
-Check if the pods are running:
+Check running pods.
 
 ```bash
 kubectl get pods
 ```
 
-Check the services:
+Check services.
 
 ```bash
 kubectl get svc
@@ -128,12 +201,41 @@ kubectl get svc
 
 ---
 
-### 6. Access the application
+# 7. Access the Application
 
-Get the external IP of the frontend service:
+Get the external IP of the frontend service.
 
 ```bash
 kubectl get svc frontend-external
 ```
 
-Open the external IP in your browser to access the application.
+Open the **EXTERNAL-IP** in your browser.
+
+---
+
+# Repository Structure
+
+```
+E-commerce-Microservice-application
+│
+├── docs
+│   └── architecture.png
+│
+├── micro-service-demo
+│
+├── EKS-cluster-terraform
+│
+└── README.md
+```
+
+---
+
+# Summary
+
+This project demonstrates practical experience with:
+
+* Cloud-native application deployment
+* Containerization using Docker
+* Kubernetes orchestration
+* Infrastructure as Code using Terraform
+* AWS services such as EKS and ECR
