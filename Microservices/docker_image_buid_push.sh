@@ -13,10 +13,17 @@ aws ecr get-login-password --region "$AWS_REGION" \
 | docker login --username AWS --password-stdin "$ECR_URI"
 
 echo "🔹 Searching for Dockerfiles in ./src/"
-mapfile -t DOCKERFILES < <(find Microservices -type f -name Dockerfile)
+# Determine the base directory of the script
+BASE_DIR="$(dirname "$0")"
 
+# Find all Dockerfiles under BASE_DIR/src
+# Find Dockerfiles inside src/<service>/Dockerfile
+mapfile -t DOCKERFILES < <(find "$BASE_DIR/src" -mindepth 2 -maxdepth 2 -type f -name Dockerfile)
+
+# Check if any Dockerfiles were found
 if [ ${#DOCKERFILES[@]} -eq 0 ]; then
-  echo "❌ No Dockerfiles found under Microservices/. Expected: Microservices/<service>/Dockerfile"
+  echo "❌ No Dockerfiles found under $BASE_DIR/src. Expected: src/<service>/Dockerfile"
+  exit 1
 fi
 
 echo "🔹 Found ${#DOCKERFILES[@]} services."
