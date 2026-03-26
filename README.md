@@ -37,7 +37,7 @@ terraform apply -auto-approve
 ## ☸️ Step 2: Configure kubectl
 
 ```bash
-**aws eks --region ap-northeast-1 update-kubeconfig --name demo-cluster
+aws eks --region ap-northeast-1 update-kubeconfig --name demo-cluster
 kubectl get nodes
 ```
 
@@ -55,7 +55,7 @@ cd Microservices
 ## 📦 Step 4: Deploy Microservices to Kubernetes
 
 ```bash
-**kubectl apply -f kubernetes-manifests/
+kubectl apply -f kubernetes-manifests/
 ```
 
 ```bash
@@ -68,13 +68,12 @@ kubectl get svc
 ## 🌐 Step 5: Access Application
 
 ```bash
-** kubectl get svc frontend-external
+kubectl get svc frontend-external
 ```
 
 ```text
 http://<EXTERNAL-IP>
 ```
-
 ---
 
 ## 📊 Step 6: Setup Monitoring (Prometheus + Grafana)
