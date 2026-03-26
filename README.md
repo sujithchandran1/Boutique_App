@@ -70,6 +70,7 @@ kubectl get svc
 ```bash
 kubectl get svc frontend-external
 ```
+Output => ![alt text](Outputs/website.png)
 
 ```text
 http://<EXTERNAL-IP>
@@ -121,5 +122,18 @@ kubectl get secret prometheus-grafana -n monitor \
   -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
 
+Output => ![alt text](<Outputs/Grafana Dash1.png>) ![alt text](<Outputs/Grafana Dash2.png>)
+
 * **Username:** admin
 * **Password:** Retrieved from secret
+
+
+## Jenkins 
+   ** Install the required packages in the jenkins instance.
+   ** Get the password in the given path after hosting the jenkins dashboard.
+   ** Install the Plugins and set your aws credentials in the credentials at manage jenkins.
+   ** Create Job (Pipeline Script).
+   ** Build it.
+   ** Output => ![alt text](<Outputs/Jenkins Dash1.png>) ![alt text](<Outputs/Jenkins Dash2_pods.png>) ![alt text](<Outputs/Jenkins Dash3.png>)
+
+
